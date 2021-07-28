@@ -19,7 +19,7 @@ function RightMenu(props) {
     });
   };
 
-  if (user.userData && !user.userData.isAuth) {
+  if (user.userData && !user.userData.isAuth) {//로그인 되어있지 않다면
     return (
       <Menu mode={props.mode}>
         <Menu.Item key="mail">

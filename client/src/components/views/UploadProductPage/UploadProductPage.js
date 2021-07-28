@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { Typography, Button, Form, Input } from 'antd';
 import FileUpload from '../../utils/FileUpload';
 import Axios from 'axios';
+
+const { Title } = Typography;
 const { TextArea } = Input;
 
 const Continents = [
@@ -16,10 +18,10 @@ const Continents = [
 
 function UploadProductPage(props) {
 
-    const [Title, setTitle] = useState("")
+    const [Title, setTitle] = useState("")//초기값은 빈 값으로 지정
     const [Description, setDescription] = useState("")
     const [Price, setPrice] = useState(0)
-    const [Continent, setContinent] = useState(1)
+    const [Continent, setContinent] = useState(1)//상품의 대륙 기본값은 1
     const [Images, setImages] = useState([])
 
     const titleChangeHandler = (event) => {
@@ -38,8 +40,8 @@ function UploadProductPage(props) {
         setContinent(event.currentTarget.value)
     }
 
-    const updateImages = (newImages) => {
-        setImages(newImages)
+    const updateImages = (newImages) => {//여기서 정한 newImage는 utiles/FileUpload.js(자식컴포넌트)에서 받은 이미지임
+        setImages(newImages)//그래서 그 받아온 이미지를 현재 이페이지의 state인 SetImage에 넣어줌으로써 이페이지에서 이미지를 사용가능
     }
 
     const submitHandler = (event) => {
@@ -77,12 +79,18 @@ function UploadProductPage(props) {
     return (
         <div style={{ maxWidth: '700px', margin: '2rem auto' }}>
             <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-                <h2> 여행 상품 업로드</h2>
+                <h1> 상품 업로드</h1>
             </div>
 
             <Form onSubmit={submitHandler}>
                 {/* DropZone */}
                 <FileUpload refreshFunction={updateImages} />
+                
+                {/* 이 prop(refreshFunction)를 위에서 지정후 FileUpload.js에 전달 
+                    이렇게 porp(refreshFunction)를 통해
+                     부모컴포넌트는 자식컴포넌트에서 발생하는 상태변화를 모두 전달받아
+                    서버쪽에 보낼 모든 정보를 가지고있게됨
+                */}
 
                 <br />
                 <br />
@@ -102,12 +110,15 @@ function UploadProductPage(props) {
                     {Continents.map(item => (
                         <option key={item.key} value={item.key}> {item.value}</option>
                     ))}
+
+
+                
                 </select>
                 <br />
                 <br />
-                <button type="submit">
-                    확인
-                </button>
+                <Button type="submit">
+                    등록하기
+                </Button>
             </Form>
 
 
