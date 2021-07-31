@@ -11,7 +11,7 @@ import { continents, price } from './Sections/Datas';
 
 function LandingPage() {
 
-    const [Products, setProducts] = useState([])
+    const [Products, setProducts] = useState([])//여러가지 상품들이 올것이기때문에 useState사용
     const [Skip, setSkip] = useState(0)
     const [Limit, setLimit] = useState(8)
     const [PostSize, setPostSize] = useState(0)
@@ -33,7 +33,7 @@ function LandingPage() {
     }, [])
 
     const getProducts = (body) => {
-        axios.post('/api/product/products', body)
+        axios.post('/api/product/products', body)//필요한 갯수만큼만 가져오기위해 body에 담아 전달. 그리고 이것을 라우터에서 처리
             .then(response => {
                 if (response.data.success) {
                     if (body.loadMore) {
@@ -66,12 +66,18 @@ function LandingPage() {
     }
 
 
-    const renderCards = Products.map((product, index) => {
-
+    const renderCards = Products.map((product, index) => {//Products안에 여러개의 Card가 있는 것과 같음. 그래서 product하나하나 컨트롤가능
         return <Col lg={6} md={8} xs={24} key={index}>
+        {/* 사이즈지정해주는 것 일반일땐 6x4=24 / 화면이 반일때 8x3=24 /제일 작은화면일때는 한장이 24 전부 차지 */}
+
+
+         {/* Card/Meta가 핵심 */}
+
             <Card
                 cover={<a href={`/product/${product._id}`} ><ImageSlider images={product.images} /></a>}
-            >
+                                                               // ImageSlider 컴포넌트로 이미지 전달해야하기때문에 {product.images}이렇게처리
+                                                                //ImageSlider페이지에서는 이것을 props를 통해 가져온다.저 안에는 다양한 사진이 담긴다.
+           >
                 <Meta
                     title={product.title}
                     description={`$${product.price}`}
@@ -148,7 +154,7 @@ function LandingPage() {
 
             {/* Filter */}
 
-            <Row gutter={[16, 16]}>
+            <Row gutter={[16, 16]}>  
                 <Col lg={12} xs={24}>
                     {/* CheckBox */}
                     <Checkbox list={continents} handleFilters={filters => handleFilters(filters, "continents")} />
@@ -174,7 +180,7 @@ function LandingPage() {
             {/* Cards */}
 
 
-            <Row gutter={[16, 16]} >
+            <Row gutter={[16, 16]} >  {/* 여백지정 */}
                 {renderCards}
             </Row>
 

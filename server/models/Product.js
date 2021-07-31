@@ -21,6 +21,8 @@ const productSchema = mongoose.Schema({
         type: Array,
         default: []
     },
+
+    //팔린 갯수
     sold: {
         type: Number,
         maxlength: 100,

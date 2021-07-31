@@ -47,6 +47,8 @@ function UploadProductPage(props) {
     const submitHandler = (event) => {
         event.preventDefault();
 
+        //유효성검사
+
         if (!Title || !Description || !Price || !Continent || Images.length === 0) {
             return alert(" 모든 값을 넣어주셔야 합니다.")
         }
@@ -64,7 +66,7 @@ function UploadProductPage(props) {
             continents: Continent
         }
 
-        Axios.post('/api/product', body)
+        Axios.post('/api/product', body) //post방식이니까 body가 필요. 위에서 body부분 정의
             .then(response => {
                 if (response.data.success) {
                     alert('상품 업로드에 성공 했습니다.')
@@ -116,9 +118,9 @@ function UploadProductPage(props) {
                 </select>
                 <br />
                 <br />
-                <Button type="submit">
+                <button type="submit">
                     등록하기
-                </Button>
+                </button>
             </Form>
 
 

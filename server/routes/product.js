@@ -61,7 +61,7 @@ router.post('/products', (req, res) => {
 
     let findArgs = {};
 
-    for (let key in req.body.filters) {
+    for (let key in req.body.filters) {  //showFilterResults에서 body안에 filter도 같이보냄
         if (req.body.filters[key].length > 0) {
 
             console.log('key', key)
