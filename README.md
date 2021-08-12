@@ -2,6 +2,8 @@
 
 ## -여행사 사이트
 
+![flygovideo](https://user-images.githubusercontent.com/77622831/129156073-a96fc536-18dd-48b8-83d2-55b2e10a3f81.gif)
+
 
 
 
